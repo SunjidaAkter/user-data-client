@@ -27,7 +27,7 @@ function App() {
     e.preventDefault();
     duplicate = names.find((element, index) => {
       setDuplicateIndex(index);
-      return element.name === e.target.value;
+      return element.name.toLowerCase() === e.target.value.toLowerCase();
     });
     // setDuplicateIndex(names.indexOf(e.target.value));
 
