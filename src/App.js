@@ -14,7 +14,7 @@ function App() {
   const [reload, setReload] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:5000/users')
+    fetch('https://stark-harbor-97759.herokuapp.com/users')
       .then(res => res.json())
       .then(data => {
         setNames(data);
@@ -50,7 +50,7 @@ function App() {
 
     const userName = { name: name };
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://stark-harbor-97759.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(userName),
       headers: {
@@ -82,11 +82,9 @@ function App() {
               placeholder="Username"
               name="name"
               onChange={onChanged}
-              className="border border-slate-800 rounded-md  h-10 w-full px-5" />
-            {/* <input
-              className='border border-slate-800 rounded-md h-10 w-1/3'
-              type="text"
-            /> */}
+              className="border border-slate-800 rounded-md  h-10 w-full px-5"
+              required />
+
             <label class="label">
               <span class={`${disable ? "font-bold label-text-alt text-red-900 text-base" : "font-bold text-base text-lime-900 label-text-alt"}`}>{error}</span>
 
@@ -97,7 +95,7 @@ function App() {
             <p className='mt-10 mb-4 text-left text-2xl text-lime-900 font-extrabold'>Database Usernames :</p>
           </form>
           <div className='mt-0 mb-10'>
-            {loading && <p>Loading...</p>}
+            {loading && <p className='font-extrabold'>Loading...</p>}
             {names.map((name, index) =>
               <>
                 <p className={index == duplicateIndex ? "text-green-800 text-xl font-extrabold text-left" : "text-base font-semibold text-slate-700 text-left"}>{index + 1}. {name.name}</p>
