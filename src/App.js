@@ -35,10 +35,10 @@ function App() {
 
     if (duplicate) {
       setDisable(true);
-      setError("Username is not unique");
+      setError("UserName is not unique");
     } else {
       setDisable(false);
-      setError("Username is unique");
+      setError("UserName is unique");
       setDuplicateIndex(-1);
     }
   }
@@ -60,48 +60,56 @@ function App() {
       .then((response) => response.json())
       .then((result) => {
         if (result.acknowledged) {
-          toast("Username has been added correctly!");
+          toast.success("UserName has been added successfully!");
           setReload(!reload);
           event.target.reset();
         }
       });
   };
   return (
-    <div className="App">
+    <div className="App ">
       {/* <p className="mt-5 mb-5 text-red-900">Enter User Name :</p> */}
-      <div className='flex justify-center mt-10'>
-        <div class="form-control w-full max-w-xs  ">
-          <p className='mt-4 mb-4 text-2xl text-lime-900 font-extrabold'>Form</p>
-          <form onSubmit={submitHandler}>
-            <label class="label">
-              <span class="label-text font-bold">Enter User Name :</span>
+      {/* <div className='flex justify-center mt-10'>
+        <div class="form-control w-full max-w-xs  "> */}
+      <div className="first-letter flex justify-center items-center">
+        <div className="mt-5 bg-gray-800 h-[200px] lg:w-1/2 w-[90%] p-5 rounded-lg shadow-lg ">
+          <p className=' text-2xl text-slate-300 font-extrabold'>Form</p>
+          <div className=" flex justify-center ">
+            <form className="relative w-5/6" onSubmit={submitHandler}>
+              <label class="label">
+                <span class="label-text font-bold text-white">Enter Unique UserName :</span>
 
-            </label>
-            <input
-              type="text"
-              placeholder="Username"
-              name="name"
-              onChange={onChanged}
-              className="border border-slate-800 rounded-md  h-10 w-full px-5"
-              required />
+              </label>
+              <input
+                type="text"
+                placeholder="Username"
+                name="name"
+                onChange={onChanged}
+                className="h-10 w-full rounded-full focus:outline-none px-5"
+                // className="border border-slate-800 rounded-md  h-10 w-full px-5"
+                required />
 
-            <label class="label">
-              <span class={`${disable ? "font-bold label-text-alt text-red-900 text-base" : "font-bold text-base text-lime-900 label-text-alt"}`}>{error}</span>
+              <button disabled={disable} className={`${disable ? "bg-gray-500 text-gray-700 rounded-full px-5 h-10 absolute right-0 border border-white" : "bg-black text-white rounded-full px-5 h-10 absolute right-0 border border-white hover:bg-slate-800 transition-all duration-300 ease-in-out "}`} type="submit">add</button>
+              <label class="label">
+                <span class={`${disable ? "font-bold label-text-alt text-red-500 text-base" : "font-bold text-base text-lime-500 label-text-alt"}`}>{error}</span>
 
-            </label>
-            <div className='flex justify-start'>
-              <button disabled={disable} className={`${disable ? "inline bg-zinc-800 text-white bg-opacity-50 uppercase px-5 py-2 rounded-md w-1/3" : "inline w-1/3 bg-zinc-800 text-white uppercase px-5 py-2 rounded-md"}`} type="submit">add</button>
-            </div>
-            <p className='mt-10 mb-4 text-left text-2xl text-lime-900 font-extrabold'>Database Usernames :</p>
-          </form>
-          <div className='mt-0 mb-10'>
-            {loading && <p className='font-extrabold'>Loading...</p>}
-            {names.map((name, index) =>
-              <>
-                <p className={index == duplicateIndex ? "text-green-800 text-xl font-extrabold text-left" : "text-base font-semibold text-slate-700 text-left"}>{index + 1}. {name.name}</p>
-                {console.log(duplicateIndex)}
-              </>)}
+              </label>
+              {/* <div className='flex justify-start'> */}
+              {/* </div> */}
+            </form>
           </div>
+        </div>
+      </div>
+      <div className='flex justify-center items-center'>
+        <div className='mt-5 lg:w-1/2 w-[90%] mb-10 bg-gray-800  p-5 rounded-lg shadow-lg'>
+          <p className=' mb-4 text-center text-2xl text-slate-300 font-extrabold'>Database Usernames :</p>
+          {loading && <p className='font-extrabold text-white'>Loading...</p>}
+          {names.map((name, index) =>
+            <>
+              <p className={index == duplicateIndex ? "text-green-300 text-xl font-extrabold px-11 text-left" : "px-11 text-base font-semibold text-white text-left"}>{index + 1}. {name.name}</p>
+              {console.log(duplicateIndex)}
+            </>)}
+
         </div>
       </div>
       {/* <label className='label' htmlFor="">Enter Username :</label><br /> */}
